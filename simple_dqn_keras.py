@@ -92,7 +92,7 @@ class Agent(object):
 
         else:
             # print("not random")
-            actions = self.q_eval.predict(state)
+            actions = self.q_eval.predict(state, verbose=0)
             # print("yielded actions: ", actions)
             actions = actions[0, legal_actions]
             action = legal_actions[np.argmax(actions)]
@@ -106,8 +106,8 @@ class Agent(object):
         )
         action_values = np.array(self.action_space, dtype=np.int8)
         action_indices = np.dot(action, action_values)
-        q_eval = self.q_eval.predict(state)
-        q_next = self.q_eval.predict(new_state)
+        q_eval = self.q_eval.predict(state, verbose=0)
+        q_next = self.q_eval.predict(new_state, verbose=0)
 
         q_target = q_eval.copy()
         batch_index = np.arange(self.batch_size, dtype=np.int32)

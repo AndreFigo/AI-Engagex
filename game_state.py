@@ -15,12 +15,16 @@ class EngagexPlayer(object):
     def move(self, direction):
         if direction == "north":
             self.y += 1
+            self.hp -= 1
         elif direction == "south":
             self.y -= 1
+            self.hp -= 1
         elif direction == "east":
             self.x += 1
+            self.hp -= 1
         elif direction == "west":
             self.x -= 1
+            self.hp -= 1
         else:
             print("Invalid direction")
 
@@ -154,13 +158,14 @@ def hash_pos(pos, key):
 
 
 class GameState(object):
-    def __init__(self, num_players):
+    def __init__(self, num_players, no_moves=500):
         self.key = random.randint(1, 1e9)
         self.num_players = num_players
         self.players = [EngagexPlayer(i, i, i, self) for i in range(num_players)]
         self.cell_life = {}
-        self.remaining_moves = 1000
+        self.remaining_moves = no_moves
         self.num_actions = 11
+        self.total_actions = [0 for i in range(self.num_actions)]
 
     def can_to_go(self, x, y):
         playersInPos = [p for p in self.players if p.x == x and p.y == y]
@@ -195,19 +200,24 @@ class GameState(object):
         if len(playersWest) < 2:
             ans.append(3)
 
-        if (player.x, player.y) in self.cell_life and self.cell_life[
-            (player.x, player.y)
-        ] > 0:
-            ans.append(4)  # collect
+        if (
+            (player.x, player.y) in self.cell_life
+            and self.cell_life[(player.x, player.y)] > 0
+            and player.hp < 100
+        ):
+            ans.append(4)  # collect - player must not be in full health
         if player.hp > 1:
             ans.append(5)  # commit
-        if player.hp > 20:  # seed
+        if player.hp > 20 and (
+            (player.x, player.y) not in self.cell_life
+            or self.cell_life[(player.x, player.y)] < 100
+        ):  # seed
             ans.append(6)
 
         playersInPos = [
             p
             for p in self.players
-            if p.x == player.x and p.y == player.y and p.id != player.id
+            if p.x == player.x and p.y == player.y and p.id != player.id and p.hp > 0
         ]
         if len(playersInPos) > 0:
             ans.append(7)  # attack
@@ -219,7 +229,9 @@ class GameState(object):
         # print("Legal actions: ", ans)
         return np.array(ans, dtype=np.int32)
 
-    def observation_tensor(self, player_id):
+    def observation_tensor(
+        self, player_id
+    ):  # to what point could we include game-related metrics such as closest cell with fuel?
         num_rows_observation = 2
         num_cols_observation = 3
         observation = np.zeros(
@@ -241,7 +253,12 @@ class GameState(object):
                     if len(playersInPos) > 1:
                         observation[ri, rj, 3] = playersInPos[1].hp
                         observation[ri, rj, 4] = playersInPos[1].xp
-        return observation.flatten()
+        observation = observation.flatten()
+        # now include other relevant metrics
+        other_scores = [p.xp for p in self.players if p.id != player_id]
+        own_score = self.players[player_id].xp
+        observation = np.hstack((observation, own_score, other_scores))
+        return observation
 
     def step(self, id, action):
         actions = [
@@ -265,10 +282,25 @@ class GameState(object):
         self.players[id].apply_action(act)
         curr_score = self.players[id].xp
         reward = curr_score - prev_score
+        if (
+            self.players[id].hp == 0
+        ):  # player died, needs to avoid dying and to maximize score
+            if self.players[id].xp < 100:
+                reward -= 100 - self.players[id].xp
+            else:
+                best_player_score = max([p.xp for p in self.players])
+                reward -= best_player_score - self.players[id].xp
         observation = self.observation_tensor(id)
         self.remaining_moves -= 1
-        done = not self.players[id].is_alive() or self.remaining_moves <= 0
-        print("remaining moves: ", self.remaining_moves)
+        done = self.remaining_moves <= 0 or all(
+            [self.players[i].hp <= 0 for i in range(self.num_players)]
+        )
+        print(id, "-", act, "health", self.players[id].hp, "xp", self.players[id].xp)
+        if self.remaining_moves % 100 == 0:
+            print("Remaining moves: ", self.remaining_moves)
+
+        self.total_actions[action] += 1  # so that we can count and plot them
+
         # print("observation: ", observation.shape)
         # print("reward", reward)
         # print("done", done)
