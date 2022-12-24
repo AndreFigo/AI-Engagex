@@ -4,7 +4,7 @@ import matplotlib
 
 matplotlib.use("Qt5Agg")
 import matplotlib.pyplot as plt
-
+# material and methods: falar das regras neste lado
 
 def plot_training(matrix):
     playerscores = matrix[:, :4]

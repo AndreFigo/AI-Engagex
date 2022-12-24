@@ -129,3 +129,6 @@ class Agent(object):
 
     def load_model(self):
         self.q_eval = load_model(self.model_file)
+
+    def __str__(self):
+        return f"Agent: gamma: {self.gamma}, epsilon: {self.epsilon}, epsilon_dec:{self.epsilon_dec}, epsilon_end:{self.epsilon_min}, batch_size: {self.batch_size}, mem_size: {self.memory.mem_size}"
