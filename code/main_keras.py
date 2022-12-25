@@ -16,7 +16,7 @@ if __name__ == "__main__":
     file_output = "%s/output.csv" % sys.argv[1]
     file_agent_record = "%s/agent_record.csv" % sys.argv[1]
 
-    n_games = 500
+    n_games = 100000
     learn_from_games(
-        n_games, num_players, random_play=True, model_folder=model_folder, record=True
+        n_games, num_players, random_play=False, model_folder=model_folder, record=True
     )
