@@ -1,3 +1,6 @@
 models/
 *.h5
 __pycache__/
+bin/
+*.whl
+
