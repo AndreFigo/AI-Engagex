@@ -1,0 +1,4 @@
+Agent: gamma: 1, epsilon: 1, epsilon_dec:0.996, epsilon_end:0.01, batch_size: 64, mem_size: 64
+Agent: gamma: 1, epsilon: 1, epsilon_dec:0.996, epsilon_end:0.01, batch_size: 64, mem_size: 64
+Agent: gamma: 1, epsilon: 1, epsilon_dec:0.996, epsilon_end:0.01, batch_size: 64, mem_size: 64
+Agent: gamma: 1, epsilon: 1, epsilon_dec:0.996, epsilon_end:0.01, batch_size: 64, mem_size: 64

@@ -183,22 +183,22 @@ class GameState(object):
             p for p in self.players if p.x == player.x and p.y == player.y + 1
         ]
         if len(playersNorth) < 2:
-            ans.append(0)
+            ans.append(0) # "move_north"
         playersSouth = [
             p for p in self.players if p.x == player.x and p.y == player.y - 1
         ]
         if len(playersSouth) < 2:
-            ans.append(1)
+            ans.append(1) # "move_south"
         playersEast = [
             p for p in self.players if p.x == player.x + 1 and p.y == player.y
         ]
         if len(playersEast) < 2:
-            ans.append(2)
+            ans.append(2) # "move_east"
         playersWest = [
             p for p in self.players if p.x == player.x - 1 and p.y == player.y
         ]
         if len(playersWest) < 2:
-            ans.append(3)
+            ans.append(3) # "move_west"
 
         if (
             (player.x, player.y) in self.cell_life
@@ -260,7 +260,7 @@ class GameState(object):
         observation = np.hstack((observation, own_score, other_scores))
         return observation
 
-    def step(self, id, action):
+    def step(self, id_player, action, print_player_action = False):
         actions = [
             "move_north",
             "move_south",
@@ -275,27 +275,32 @@ class GameState(object):
             "share",
         ]
         act = actions[action]
+        prev_score = self.players[id_player].xp
+        self.players[id_player].apply_action(act)
+        curr_score = self.players[id_player].xp
+        reward = curr_score - prev_score
         if action < 0 or action > len(actions):
             print("Invalid action")
             return
-        prev_score = self.players[id].xp
-        self.players[id].apply_action(act)
-        curr_score = self.players[id].xp
-        reward = curr_score - prev_score
+        if act[:4] == "move":
+            reward -=1
+        if act == "seed":
+            reward += 10
         if (
-            self.players[id].hp == 0
+            self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
-            if self.players[id].xp < 100:
-                reward -= 100 - self.players[id].xp
+            if self.players[id_player].xp < 100:
+                reward -= 100 - self.players[id_player].xp
             else:
                 best_player_score = max([p.xp for p in self.players])
-                reward -= best_player_score - self.players[id].xp
-        observation = self.observation_tensor(id)
+                reward -= best_player_score - self.players[id_player].xp
+        observation = self.observation_tensor(id_player)
         self.remaining_moves -= 1
         done = self.remaining_moves <= 0 or all(
             [self.players[i].hp <= 0 for i in range(self.num_players)]
         )
-        print(id, "-", act, "health", self.players[id].hp, "xp", self.players[id].xp)
+        if print_player_action:
+            print(id_player, "-", act, "health", self.players[id_player].hp, "xp", self.players[id_player].xp)
         if self.remaining_moves % 100 == 0:
             print("Remaining moves: ", self.remaining_moves)
 

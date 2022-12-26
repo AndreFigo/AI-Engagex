@@ -82,7 +82,7 @@ class Agent(object):
     def remember(self, state, action, reward, state_, done):
         self.memory.store_transition(state, action, reward, state_, done)
 
-    def choose_action(self, state, legal_actions):
+    def choose_action(self, state, legal_actions, print_q_vector = False):
         state = state[np.newaxis, :]
         rand = np.random.random()
         # print("legal_actions", legal_actions)
@@ -93,7 +93,8 @@ class Agent(object):
         else:
             # print("not random")
             actions = self.q_eval.predict(state, verbose=0)
-            # print("yielded actions: ", actions)
+            if print_q_vector:
+            i   print("yielded actions: ", actions)
             actions = actions[0, legal_actions]
             action = legal_actions[np.argmax(actions)]
         return action
