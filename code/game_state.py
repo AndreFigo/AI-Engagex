@@ -283,7 +283,7 @@ class GameState(object):
             print("Invalid action")
             return
         if act[:4] == "move":
-            reward -=1
+            reward -=0.3
         if act == "seed" or act == "collect":
             reward += 10
 
