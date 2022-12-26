@@ -282,10 +282,10 @@ class GameState(object):
         if action < 0 or action > len(actions):
             print("Invalid action")
             return
-        if act[:4] == "move":
-            reward -=0.3
-        if act == "seed" or act == "collect":
-            reward += 10
+        # if act[:4] == "move":
+        #    reward -=0.3
+        #if act == "seed" or act == "collect":
+        #    reward += 10
 
         if (
             self.players[id_player].hp == 0
