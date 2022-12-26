@@ -52,6 +52,8 @@ def get_agents(
         all_agents = [rational_agent(obs, num_actions) for _ in range(num_agents)]
         return all_agents
 
+def record_condition(i:int):
+    return i % 100 == 0
 
 def learn_from_games(
     n_games,
@@ -75,22 +77,29 @@ def learn_from_games(
         done = False
         scores = [0 for _ in range(env.num_players)]
         env = GameState(num_players)
+        game_record = np.array([])
         while not done:
             for j in range(env.num_players):  # agent in agents:
                 agent: Agent = agents[j]
 
                 legal_actions = env.legal_actions(env.players[j])
                 if len(legal_actions) == 0:
-                    if env.players[j].hp <= 0 and i % 100 == 0:
+                    if env.players[j].hp <= 0 and record_condition(i):
                         print("Player ", j, " is dead with score ", env.players[j].xp)
                     continue
                 # print("Legal actions in main:", legal_actions)
                 obs = env.observation_tensor(j)
                 action = agent.choose_action(obs, legal_actions, print_q_vector = (i%10 == 0) )
-                observation_, reward, done = env.step(j, action, i%100 == 0)
+                observation_, reward, done = env.step(j, action, record_condition(i))
                 scores[j] += reward
                 # obs_after = env.observation_tensor(i)
                 agent.remember(obs, action, reward, observation_, int(done))
+                if record_condition(i):
+                    aid = np.hstack((j, obs[:-num_players], action, observation_[:-num_players])) # all the necessary info for the gui
+                    if game_record.shape[0] == 0:
+                        game_record = np.array(aid)
+                    else:
+                        game_record = np.vstack((game_record, aid))
                 agent.learn()
         if record:
             player_xps: list = [env.players[i].xp for i in range(env.num_players)]
@@ -99,6 +108,9 @@ def learn_from_games(
             str_init += "," + ",".join([str(i) for i in env.total_actions])
             file_id.write("%s\n" % str_init)
             file_id.flush()
+        if record_condition(i) :
+            np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
+            
 
         # eps_history.append(agent.epsilon)
         print(
@@ -109,7 +121,7 @@ def learn_from_games(
             "epsilon %.2f" % agents[0].epsilon,
         )
 
-        if (i + 1) % 10 == 0:
+        if record_condition(i):
             j = 0
             for agent in agents:
                 agent.model_file = "%s/model_agent_%d_epoch_%d.h5" % (
