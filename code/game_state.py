@@ -284,8 +284,9 @@ class GameState(object):
             return
         if act[:4] == "move":
             reward -=1
-        if act == "seed":
+        if act == "seed" or act == "collect":
             reward += 10
+
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score

@@ -93,9 +93,9 @@ class Agent(object):
         else:
             # print("not random")
             actions = self.q_eval.predict(state, verbose=0)
-            if print_q_vector:
-            i   print("yielded actions: ", actions)
             actions = actions[0, legal_actions]
+            if print_q_vector:
+                print("yielded actions: ", actions)
             action = legal_actions[np.argmax(actions)]
         return action
 

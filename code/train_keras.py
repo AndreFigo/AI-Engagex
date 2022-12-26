@@ -81,12 +81,12 @@ def learn_from_games(
 
                 legal_actions = env.legal_actions(env.players[j])
                 if len(legal_actions) == 0:
-                    if env.players[j].hp <= 0 && i % 100 = 0:
+                    if env.players[j].hp <= 0 and i % 100 == 0:
                         print("Player ", j, " is dead with score ", env.players[j].xp)
                     continue
                 # print("Legal actions in main:", legal_actions)
                 obs = env.observation_tensor(j)
-                action = agent.choose_action(obs, legal_actions, print_q_vector = (i%100 == 0) )
+                action = agent.choose_action(obs, legal_actions, print_q_vector = (i%10 == 0) )
                 observation_, reward, done = env.step(j, action, i%100 == 0)
                 scores[j] += reward
                 # obs_after = env.observation_tensor(i)
