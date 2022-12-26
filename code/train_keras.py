@@ -28,7 +28,7 @@ def rational_agent(obs: np.ndarray, num_actions: int) -> Agent:
         gamma=1,  # gamma = 1 means no discounting
         epsilon_dec=0.996,  # after 2300 moves in each agent, epsilon is 0.1
         epsilon=1,
-        alpha=0.001,
+        alpha=1e-5,
         input_dims=(obs.shape),
         n_actions=num_actions,
         mem_size=64,
