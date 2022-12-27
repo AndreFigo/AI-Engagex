@@ -276,17 +276,19 @@ class GameState(object):
         ]
         act = actions[action]
         prev_score = self.players[id_player].xp
+        prev_health = self.players[id_player].hp
         self.players[id_player].apply_action(act)
         curr_score = self.players[id_player].xp
         reward = curr_score - prev_score
         if action < 0 or action > len(actions):
             print("Invalid action")
             return
-        #if act[:4] == "move":
-        #    reward -=0.3
-        if act == "seed" or act == "collect":
-            reward += 5
-
+        if act == "collect" and prev_health <=35:
+            # aims to favor collection when health <= 35
+            reward += 25
+        if act == "seed"and prev_health >=70:
+            # aims to favor sowing when health >= 70
+            reward += (prev_health // 2 + 2)
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
