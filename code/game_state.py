@@ -245,8 +245,9 @@ class GameState(object):
                 y = self.players[player_id].y + i
                 if (x, y) in self.cell_life:
                     observation[ri, rj, 0] = self.cell_life[(x, y)]
-                observation[ri, rj, 1:4] = -1
+                observation[ri, rj, 1:4] = -100
                 playersInPos = [p for p in self.players if p.x == x and p.y == y]
+                playersInPos.sort(key = lambda p: abs(player_id - p.id))
                 if len(playersInPos) > 0:
                     observation[ri, rj, 1] = playersInPos[0].hp
                     observation[ri, rj, 2] = playersInPos[0].xp
@@ -285,10 +286,10 @@ class GameState(object):
             return
         if act == "collect" and prev_health <=35:
             # aims to favor collection when health <= 35
-            reward += 35
-        if act == "seed"and prev_health >=70:
+            reward += 100
+        if act == "seed" and prev_health >=70:
             # aims to favor sowing when health >= 70
-            reward += 60
+            reward += 100
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
