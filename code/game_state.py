@@ -285,10 +285,10 @@ class GameState(object):
             return
         if act == "collect" and prev_health <=35:
             # aims to favor collection when health <= 35
-            reward += 25
+            reward += 35
         if act == "seed"and prev_health >=70:
             # aims to favor sowing when health >= 70
-            reward += (prev_health // 2 + 2)
+            reward += 60
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
