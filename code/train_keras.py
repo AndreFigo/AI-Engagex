@@ -95,7 +95,7 @@ def learn_from_games(
                 # obs_after = env.observation_tensor(i)
                 agent.remember(obs, action, reward, observation_, int(done))
                 if record_condition(i):
-                    aid = np.hstack((j, obs[:-num_players], action, observation_[:-num_players])) # all the necessary info for the gui
+                    aid = np.hstack((j, obs[:-(num_players+1)], action, observation_[:-(num_players+1)])) # all the necessary info for the gui
                     if game_record.shape[0] == 0:
                         game_record = np.array(aid)
                     else:

@@ -258,7 +258,7 @@ class GameState(object):
         # now include other relevant metrics
         other_scores = [p.xp for p in self.players if p.id != player_id]
         own_score = self.players[player_id].xp
-        observation = np.hstack((observation, own_score, other_scores))
+        observation = np.hstack((observation, own_score, other_scores, self.remaining_moves)
         return observation
 
     def step(self, id_player, action, print_player_action = False):
@@ -286,10 +286,10 @@ class GameState(object):
             return
         if act == "collect" and prev_health <=35:
             # aims to favor collection when health <= 35
-            reward += 100
+            reward += 60
         if act == "seed" and prev_health >=70:
             # aims to favor sowing when health >= 70
-            reward += 100
+            reward += 60
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
