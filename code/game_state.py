@@ -258,7 +258,7 @@ class GameState(object):
         # now include other relevant metrics
         other_scores = [p.xp for p in self.players if p.id != player_id]
         own_score = self.players[player_id].xp
-        observation = np.hstack((observation, own_score, other_scores, self.remaining_moves)
+        observation = np.hstack((observation, own_score, other_scores, self.remaining_moves))
         return observation
 
     def step(self, id_player, action, print_player_action = False):
