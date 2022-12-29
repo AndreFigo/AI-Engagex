@@ -4,4 +4,4 @@ __pycache__/
 bin/
 *.whl
 lib/
-
+!models/**/output.csv
