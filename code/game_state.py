@@ -210,7 +210,7 @@ class GameState(object):
             ans.append(5)  # commit
         if player.hp > 20 and (
             (player.x, player.y) not in self.cell_life
-            or self.cell_life[(player.x, player.y)] < 100
+            or self.cell_life[(player.x, player.y)] < 90
         ):  # seed
             ans.append(6)
 
