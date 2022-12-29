@@ -280,31 +280,29 @@ class GameState(object):
         prev_health = self.players[id_player].hp
         self.players[id_player].apply_action(act)
         curr_score = self.players[id_player].xp
-        reward = curr_score - prev_score
+        curr_health = self.players[id_player].hp
+        reward = 0# curr_score - prev_score
         if action < 0 or action > len(actions):
-            print("Invalid action")
+            print("Invalid action:",action)
             return
-        if act == "collect" and prev_health <=35:
+        if act == "collect":
             # aims to favor collection when health <= 35
-            reward += 60
-        elif act == "collect" and prev_health < 80:
-            reward += 30
-        if act == "seed" and prev_health >=50:
+            reward += (curr_health - prev_health)
+        if act == "seed":
             # aims to favor sowing when health >= 70
-            reward += 60
-        if act == "commit" and prev_health <=40 and prev_health> 20:
-            reward -=100 
+            reward += 50
+        # if act == "commit" and prev_health <=40 and prev_health> 20:
+        #    reward -=100 
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
-            if self.players[id_player].xp < 100:
-                # reward -= 100 - self.players[id_player].xp
-                reward -= 100 
-
-            else:
-                best_player_score = max([p.xp for p in self.players])
-                reward -= best_player_score - self.players[id_player].xp
-                reward -= 100 
+            # if self.players[id_player].xp < 100:
+            # reward -= 100 - self.players[id_player].xp
+            # reward -= 100 
+            # else:
+            #     best_player_score = max([p.xp for p in self.players])
+            #    reward -= best_player_score - self.players[id_player].xp
+            reward -= 100 
         observation = self.observation_tensor(id_player)
         self.remaining_moves -= 1
         done = self.remaining_moves <= 0 or all(
