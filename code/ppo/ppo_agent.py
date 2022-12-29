@@ -13,7 +13,7 @@ class Agent:
         n_actions,
         input_dims,
         gamma=0.99,
-        alpha=0.0003,
+        alpha=1e-6,
         gae_lambda=0.95,
         policy_clip=0.2,
         batch_size=64,
@@ -37,8 +37,8 @@ class Agent:
 
     def save_models(self):
         print("... saving models ...")
-        self.actor.save(self.chkpt_dir + "actor.h5")
-        self.critic.save(self.chkpt_dir + "critic.h5")
+        self.actor.save(self.chkpt_dir + "actor.tf")
+        self.critic.save(self.chkpt_dir + "critic.tf")
 
     def load_models(self):
         print("... loading models ...")
@@ -47,11 +47,21 @@ class Agent:
 
     def choose_action(self, observation, legal_actions):
         state = tf.convert_to_tensor([observation])
-        probs = self.actor(state)[legal_actions]
-        dist = tfp.distributions.Categorical(probs=probs)
+        print("legal actions: ", legal_actions)
+        # tf_legal_actions = tf.convert_to_tensor(legal_actions, dtype = tf.int32)
+        init_prob = self.actor(state).numpy()
+        print("initial probs:", init_prob)
+        probs_np = np.log(init_prob[:,legal_actions]) # [tf_legal_actions]
+        # sum_probs = np.sum(probs_np)
+        # probs_np /= sum_probs
+        print("probs_np:", probs_np)
+        probs = tf.convert_to_tensor(probs_np)
+        print("probs:",probs)
+        dist = tfp.distributions.Categorical(logits=probs)
         action = dist.sample()
         log_prob = dist.log_prob(action)
         value = self.critic(state)
+        print("action numpy:", action.numpy())
         action = legal_actions[action.numpy()[0]]
         value = value.numpy()[0]
         log_prob = log_prob.numpy()[0]
@@ -108,7 +118,7 @@ class Agent:
                     actor_loss = -tf.math.minimum(
                         weighted_probs, weighted_clipped_probs
                     )
-                    actor_loss = tf.nath.reduce_mean(actor_loss)
+                    actor_loss = tf.math.reduce_mean(actor_loss)
 
                     returns = advantage[batch] + values[batch]
                     critic_loss = keras.losses.MSE(critic_value, returns)

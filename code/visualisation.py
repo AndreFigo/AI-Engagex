@@ -210,10 +210,11 @@ def draw_window(past, current, action):
 def main():
     run = True
     pause= False
-    PLAYER_NUM = int(sys.argv[1])
+    PLAYER_NUM = int(sys.argv[2])
     clock = pygame.time.Clock()
-
-    exp_dir, files = get_game_records_files("model_100000_pure_collect_seed_reward_3_gamma_0.99")
+    models_dir = sys.argv[1]
+    # exp_dir, files = get_game_records_files("model_100000_pure_collect_seed_reward_3_gamma_0.99")
+    exp_dir, files = get_game_records_files(models_dir)
 
 
     index=-1

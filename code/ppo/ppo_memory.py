@@ -17,7 +17,7 @@ class PPOMemory:
         indices = np.arange(n_states, dtype = np.int64)
         np.random.shuffle(indices)
         batches = [indices[i:i+self.batch_size] for i in batch_start]
-        return np.array(self.states), np.array(self.probs), np.array(self.vals), np.array(self.rewards), np.array(self.dones), batches
+        return np.array(self.states), np.array(self.actions), np.array(self.probs), np.array(self.vals), np.array(self.rewards), np.array(self.dones), batches
 
     def store_memory(self, state, action, probs, vals, reward, done):
         self.states.append(state)
@@ -26,3 +26,12 @@ class PPOMemory:
         self.vals.append(vals)
         self.rewards.append(reward)
         self.dones.append(done)
+    
+    def clear_memory(self):
+        self.states = [];
+        self.probs = [];
+        self.actions = [];
+        self.rewards = [];
+        self.dones = [];
+        self.vals = [];
+

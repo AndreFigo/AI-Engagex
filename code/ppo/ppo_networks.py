@@ -8,7 +8,7 @@ class ActorNetwork(keras.Model):
         super(ActorNetwork, self).__init__()
         self.fc1 = Dense(fc1_dims, activation='relu')
         self.fc2 = Dense(fc2_dims, activation='relu')
-        self.fc3 = Dense(n_actions, activation='softmax')
+        self.fc3 = Dense(n_actions, activation=None)
 
     def call(self, state):
         x = self.fc1(state)

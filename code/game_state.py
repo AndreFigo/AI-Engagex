@@ -287,17 +287,24 @@ class GameState(object):
         if act == "collect" and prev_health <=35:
             # aims to favor collection when health <= 35
             reward += 60
-        if act == "seed" and prev_health >=70:
+        elif act == "collect" and prev_health < 80:
+            reward += 30
+        if act == "seed" and prev_health >=50:
             # aims to favor sowing when health >= 70
             reward += 60
+        if act == "commit" and prev_health <=40 and prev_health> 20:
+            reward -=100 
         if (
             self.players[id_player].hp == 0
         ):  # player died, needs to avoid dying and to maximize score
             if self.players[id_player].xp < 100:
-                reward -= 100 - self.players[id_player].xp
+                # reward -= 100 - self.players[id_player].xp
+                reward -= 100 
+
             else:
                 best_player_score = max([p.xp for p in self.players])
                 reward -= best_player_score - self.players[id_player].xp
+                reward -= 100 
         observation = self.observation_tensor(id_player)
         self.remaining_moves -= 1
         done = self.remaining_moves <= 0 or all(
