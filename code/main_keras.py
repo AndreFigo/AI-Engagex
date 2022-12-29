@@ -4,17 +4,16 @@ from train_keras import learn_from_games, record_agents
 import numpy as np
 import sys
 import os
-
+import datetime
 num_players = 4
 
 # i also wanted to log the agents' properties
 
 if __name__ == "__main__":
-    model_folder = sys.argv[1]
+    execution_time = datetime.datetime.now().strftime("%Y_%m_%d_%X")
+    model_folder = f"models/{sys.argv[1]}_{execution_time}"
     if not os.path.isdir(model_folder):
-        os.mkdir(model_folder)
-    file_output = "%s/output.csv" % sys.argv[1]
-    file_agent_record = "%s/agent_record.csv" % sys.argv[1]
+        os.makedirs(model_folder, exist_ok = True)
 
     n_games = 100000
     learn_from_games(
