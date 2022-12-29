@@ -1,0 +1,370 @@
+0 - commit health 50 xp 50
+1 - move_north health 99 xp 0
+2 - move_east health 99 xp 0
+3 - move_west health 99 xp 0
+0 - move_east health 49 xp 50
+1 - move_west health 98 xp 0
+2 - move_north health 98 xp 0
+3 - commit health 50 xp 49
+0 - move_south health 48 xp 50
+1 - commit health 49 xp 49
+2 - move_west health 97 xp 0
+3 - move_south health 49 xp 49
+0 - move_east health 47 xp 50
+1 - commit health 25 xp 73
+2 - move_north health 96 xp 0
+3 - move_south health 48 xp 49
+0 - commit health 24 xp 73
+1 - move_north health 24 xp 73
+2 - seed health 76 xp 0
+3 - move_south health 47 xp 49
+0 - move_east health 23 xp 73
+1 - commit health 12 xp 85
+2 - move_west health 75 xp 0
+3 - move_south health 46 xp 49
+0 - move_east health 22 xp 73
+1 - move_south health 11 xp 85
+2 - move_north health 74 xp 0
+3 - move_north health 45 xp 49
+0 - move_east health 21 xp 73
+1 - commit health 6 xp 90
+2 - move_south health 73 xp 0
+3 - move_west health 44 xp 49
+0 - move_east health 20 xp 73
+1 - move_north health 5 xp 90
+2 - move_south health 72 xp 0
+3 - move_south health 43 xp 49
+0 - move_north health 19 xp 73
+1 - commit health 3 xp 92
+2 - move_north health 71 xp 0
+3 - move_west health 42 xp 49
+0 - move_south health 18 xp 73
+1 - move_north health 2 xp 92
+2 - move_south health 70 xp 0
+3 - move_south health 41 xp 49
+0 - move_north health 17 xp 73
+1 - move_west health 1 xp 92
+2 - move_east health 69 xp 0
+3 - move_south health 40 xp 49
+0 - commit health 9 xp 81
+1 - move_west health 0 xp 92
+2 - move_west health 68 xp 0
+3 - move_south health 39 xp 49
+0 - move_south health 8 xp 81
+Player  1  is dead with score  92
+2 - commit health 34 xp 34
+3 - move_north health 38 xp 49
+0 - move_east health 7 xp 81
+Player  1  is dead with score  92
+2 - move_south health 33 xp 34
+3 - move_north health 37 xp 49
+0 - move_east health 6 xp 81
+Player  1  is dead with score  92
+2 - move_east health 32 xp 34
+3 - move_north health 36 xp 49
+0 - move_north health 5 xp 81
+Player  1  is dead with score  92
+2 - seed health 12 xp 34
+3 - move_south health 35 xp 49
+0 - move_west health 4 xp 81
+Player  1  is dead with score  92
+2 - commit health 6 xp 40
+3 - move_west health 34 xp 49
+0 - commit health 2 xp 83
+Player  1  is dead with score  92
+2 - collect health 16 xp 40
+3 - commit health 17 xp 66
+0 - move_east health 1 xp 83
+Player  1  is dead with score  92
+2 - commit health 8 xp 48
+3 - commit health 9 xp 74
+0 - move_west health 0 xp 83
+Player  1  is dead with score  92
+2 - commit health 4 xp 52
+3 - move_north health 8 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+2 - move_west health 3 xp 52
+3 - move_west health 7 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+2 - move_north health 2 xp 52
+3 - move_south health 6 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+2 - move_east health 1 xp 52
+3 - move_west health 5 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+2 - move_south health 0 xp 52
+3 - move_west health 4 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+Player  2  is dead with score  52
+3 - move_west health 3 xp 74
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+Player  2  is dead with score  52
+3 - commit health 2 xp 75
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+Player  2  is dead with score  52
+3 - move_north health 1 xp 75
+Player  0  is dead with score  83
+Player  1  is dead with score  92
+Player  2  is dead with score  52
+3 - move_east health 0 xp 75
+player_xps: [83, 92, 52, 75]
+episode  0 scores [66, 84, 79, 50] epsilon 1.00
+player_xps: [92, 63, 86, 34]
+episode  1 scores [84, 76, 173, 61] epsilon 1.00
+Remaining moves:  400
+player_xps: [50, 27, 38, 44]
+episode  2 scores [115, 42, 140, 39] epsilon 1.00
+player_xps: [39, 72, 58, 77]
+episode  3 scores [30, 163, -18, 54] epsilon 0.99
+player_xps: [0, 23, 177, 68]
+episode  4 scores [-13, 43, 368, 36] epsilon 0.97
+player_xps: [80, 13, 62, 65]
+episode  5 scores [60, -49, 24, 117] epsilon 0.95
+player_xps: [97, 73, 66, 80]
+episode  6 scores [119, 122, 32, 85] epsilon 0.93
+player_xps: [80, 1, 1, 90]
+episode  7 scores [85, -98, -98, 80] epsilon 0.91
+player_xps: [134, 71, 73, 66]
+episode  8 scores [234, 67, 123, 32] epsilon 0.88
+player_xps: [67, 7, 95, 44]
+episode  9 scores [34, 6, 141, 38] epsilon 0.86
+yielded actions:  [-2.945212   -0.7617471   6.935073   -1.2369305  15.7165785   0.82734114]
+yielded actions:  [ 4.391188   6.080503  -6.1752744 -6.7275696 28.122025  12.142963 ]
+yielded actions:  [-18.058739    9.752395   -3.0215328  -1.1222516   5.159955   -9.700332 ]
+yielded actions:  [ 0.05575656  9.858903   -8.780783    0.27214676 16.346704  ]
+yielded actions:  [-20.146141   12.976682    0.9251574  -6.1577907   1.9523064   3.9342449]
+yielded actions:  [ 0.07649178 10.0740385  -8.291005    0.46530107 16.582188  ]
+player_xps: [96, 43, 73, 95]
+episode  10 scores [92, 36, 46, 90] epsilon 0.86
+Remaining moves:  400
+player_xps: [67, 70, 14, 53]
+episode  11 scores [109, 40, 30, 167] epsilon 0.83
+player_xps: [123, 63, 48, 61]
+episode  12 scores [219, 76, 113, 120] epsilon 0.80
+player_xps: [74, 37, 65, 83]
+episode  13 scores [48, 71, 30, 116] epsilon 0.79
+player_xps: [73, 69, 62, 79]
+episode  14 scores [46, 69, 74, 109] epsilon 0.77
+Remaining moves:  400
+player_xps: [109, 34, 56, 89]
+episode  15 scores [184, 15, 12, 128] epsilon 0.75
+player_xps: [39, 103, 89, 101]
+episode  16 scores [30, 128, 103, 176] epsilon 0.73
+player_xps: [68, 67, 100, 25]
+episode  17 scores [86, 84, 125, 1] epsilon 0.72
+player_xps: [85, 62, 110, 0]
+episode  18 scores [70, 24, 82, -7] epsilon 0.70
+player_xps: [71, 75, 81, 76]
+episode  19 scores [42, 75, 60, 127] epsilon 0.69
+yielded actions:  [-5.046555   2.463472   0.7399158  8.661498  -1.9035686 -4.3249297]
+yielded actions:  [  5.905062    3.5127208  -6.10374   -10.719999   -3.5106308   4.0800467
+   5.2441435]
+yielded actions:  [-1.9268454   0.35174996  7.816558    1.4776322   9.195261   -4.8851776
+ -0.23012023 -4.5291433  -7.1912303 ]
+yielded actions:  [-5.3374047  -2.796103   11.101484    0.36464244  2.0917766   7.697719
+ -2.4305305  -1.5864532   0.1273553 ]
+yielded actions:  [-16.301102   12.556373  -13.280748  -10.362799   -2.6610098  15.516102
+  -8.515477 ]
+yielded actions:  [-3.8389764 -2.8643367  7.678756   4.416754   2.5275111  8.309206
+ -5.2335753]
+yielded actions:  [-3.6294825  7.114387   8.637294   4.322472   1.1212937 -0.6025477]
+yielded actions:  [-6.3084784  -1.9083385  14.176282    6.194421    8.1366625   7.49197
+ -0.572547   -0.65513617]
+yielded actions:  [-13.359037    9.451576  -12.591019  -13.97631    -2.6251204  19.24887  ]
+yielded actions:  [ 1.1929162 -0.6422915 -8.170097  -6.4825926 -3.5330286 12.671246
+  5.9011693]
+yielded actions:  [-3.7284708 -6.6329727 11.181051   5.501112   9.06015  ]
+yielded actions:  [-18.990704    14.348444   -15.026352    -0.55470246  13.383298  ]
+yielded actions:  [ 3.8124032   1.8627291  -5.9243326   0.34697667 -6.0510626  18.705887  ]
+yielded actions:  [-18.43435     6.276532   -6.4738593  -2.6292048  10.1642685]
+yielded actions:  [-24.78776    11.018981   -6.0126934  -1.0815076   3.1029296]
+yielded actions:  [-19.878147  17.078516  -3.365558 -15.112067  13.156827]
+yielded actions:  [ 2.9521675 -5.4140563  5.8607364  6.238565  15.010668 ]
+yielded actions:  [-3.8337364 10.37322   12.490644  10.566342   9.773019 ]
+yielded actions:  [ 4.8306766 -9.767029  14.828876   3.7750607]
+yielded actions:  [-4.076583  9.567447 12.670427  9.88995  10.175914]
+player_xps: [99, 54, 112, 30]
+episode  20 scores [123, 33, 162, 51] epsilon 0.68
+player_xps: [60, 51, 21, 101]
+episode  21 scores [71, 78, -7, 151] epsilon 0.66
+player_xps: [69, 70, 92, 37]
+episode  22 scores [119, 65, 118, 25] epsilon 0.66
+player_xps: [90, 59, 90, 79]
+episode  23 scores [80, 18, 80, 58] epsilon 0.65
+player_xps: [86, 62, 82, 95]
+episode  24 scores [72, 49, 64, 90] epsilon 0.63
+player_xps: [79, 46, 56, 95]
+episode  25 scores [108, -8, 12, 90] epsilon 0.62
+player_xps: [98, 70, 99, 59]
+episode  26 scores [121, 40, 123, 95] epsilon 0.61
+Remaining moves:  400
+player_xps: [94, 2, 52, 95]
+episode  27 scores [113, 97, 29, 165] epsilon 0.60
+player_xps: [98, 0, 98, 75]
+episode  28 scores [47, -100, 121, 102] epsilon 0.59
+player_xps: [87, 80, 33, 92]
+episode  29 scores [74, 60, 59, 84] epsilon 0.58
+yielded actions:  [ 6.35193    0.4222071 16.518738  16.342146  12.928933  -3.2314777]
+yielded actions:  [-1.2091299  3.4065762  6.08885    2.789259   2.656722  -6.2945337]
+yielded actions:  [-9.72841    8.941277   2.2024083  4.9736958  3.2722456  2.89708  ]
+yielded actions:  [  6.0986085  -8.241431   15.941903    7.473562   15.187866  -11.894045 ]
+yielded actions:  [ 5.1145563   7.272621    0.53383577  5.7553773  10.417682   -2.4775295
+  6.5884495  -6.4008923   3.1376545 ]
+yielded actions:  [-10.663543   -3.931167   -4.62845     3.0872164  -0.1458919 -10.180814
+   2.476041   -3.3637197  -5.2667027 -15.961947 ]
+yielded actions:  [ 6.815903   8.794689   8.100884   3.1092534  3.6746583 -7.5601645]
+yielded actions:  [ 7.687604   -0.03118843  2.1626387   2.9221036  12.538776   -9.833957
+  5.018805    1.0323524  -0.7882439 ]
+yielded actions:  [-1.4044842   9.200738   10.804588   11.776219    7.810595    5.300151
+ -0.11611541 -1.755482   -4.792377    9.150084  ]
+yielded actions:  [-15.472628    4.4544654 -13.947574    2.6909904  -1.9252272 -12.062485 ]
+yielded actions:  [ 3.3294683  -1.2058345  17.196714    2.4271576   0.25302717 -7.5184946
+ -5.4147134  -1.1586742 ]
+yielded actions:  [-2.9513881  10.530325    4.907128    0.35284632  4.723999    2.6606858 ]
+yielded actions:  [ 5.5088263  -2.9738116   3.7411745   3.2377956   7.976251   -0.07102659]
+yielded actions:  [-2.1876163  9.2615795 13.359584   7.179786   4.2498517 -3.265191 ]
+yielded actions:  [15.656521  -2.4263382  7.3762255  3.5081317  1.5884069]
+yielded actions:  [-2.723601   8.460905  10.917917   5.1919727  0.7625816 -1.2342793]
+yielded actions:  [-8.919583   3.7646894 -6.666314   3.887158  12.600433  -6.5241385]
+yielded actions:  [  0.35861516  -1.1289405   -8.697262   -11.246277    20.642605
+   5.9037156 ]
+yielded actions:  [ 2.7232397  -0.49053064 17.896412    4.4035068   7.4321446 ]
+yielded actions:  [-5.917087  -1.5225182 -7.197178  -2.213697   5.899463  -7.158266 ]
+yielded actions:  [-3.7049668 -5.306998  14.672261  12.36301    2.4756143]
+yielded actions:  [-3.5054681  5.4578238 11.785829   5.281369   2.4878027 -2.5404832]
+yielded actions:  [-5.1810155  2.7234256 -8.6676655 -0.9856492 21.34123    6.5571003]
+yielded actions:  [-10.65801     2.5734673   7.675363    9.447603    9.285849 ]
+yielded actions:  [ 8.638622   -0.97589225 19.850422    6.947685    9.575065  ]
+yielded actions:  [-14.403145    4.356042   -1.0451152  -7.5741405   6.4906044]
+yielded actions:  [-3.8006787 -1.8248559  5.051918  13.602637   1.7450863]
+yielded actions:  [-5.621793   3.646495  12.222067   6.414657   2.8683643]
+yielded actions:  [-16.016127    9.035443   -2.5379763  -6.0609674  13.149245 ]
+yielded actions:  [-5.7283645  3.714009  12.232818   6.50198    2.8796453]
+yielded actions:  [-6.6058435  3.0563476 12.154775   7.233189   3.1548636]
+yielded actions:  [-16.819689    5.1427236   1.8345422 -10.238806 ]
+yielded actions:  [  0.09560074   9.249792   -10.080223     1.882162    18.506573  ]
+yielded actions:  [-7.980533   3.8520594 12.932508   7.7154055  4.159362 ]
+yielded actions:  [ 9.2637548e-03  9.6845121e+00 -1.0004831e+01  2.1724279e+00
+  1.8593529e+01]
+yielded actions:  [-8.39593    3.7797337 12.937122   7.9713035  4.3974442]
+yielded actions:  [-0.09383247 10.018891   -9.919558    2.4375877  18.741175  ]
+yielded actions:  [-8.849649   3.8082473 12.931073   8.138824   4.679952 ]
+player_xps: [88, 79, 91, 87]
+episode  30 scores [76, 58, 82, 74] epsilon 0.57
+player_xps: [91, 34, 57, 91]
+episode  31 scores [82, 15, 90, 231] epsilon 0.57
+player_xps: [95, 37, 130, 73]
+episode  32 scores [90, 24, 226, 71] epsilon 0.56
+player_xps: [62, 30, 66, 97]
+episode  33 scores [74, 12, 84, 94] epsilon 0.55
+player_xps: [93, 5, 161, 94]
+episode  34 scores [86, -90, 161, 88] epsilon 0.54
+player_xps: [78, 77, 70, 91]
+episode  35 scores [81, 54, 65, 82] epsilon 0.53
+player_xps: [69, 162, 73, 90]
+episode  36 scores [139, 214, 73, 130] epsilon 0.51
+player_xps: [96, 103, 0, 96]
+episode  37 scores [92, 212, 0, 92] epsilon 0.51
+player_xps: [82, 11, 24, 57]
+episode  38 scores [89, -53, -1, 108] epsilon 0.50
+player_xps: [92, 21, 19, 95]
+episode  39 scores [84, -58, -62, 90] epsilon 0.49
+yielded actions:  [-10.236061   14.827626   -5.176316    2.1434662   6.455277    0.4112113]
+yielded actions:  [-6.262601  17.70592   -5.966317   1.5463187  5.9132833 10.529661
+ -8.600206 ]
+yielded actions:  [ 6.3589997   6.037327   -3.8483787   0.03367094 -5.8653355  15.179966
+  2.079966  ]
+yielded actions:  [-14.382679    4.908756    5.1242204  -2.2351606  11.453062  -11.200929 ]
+yielded actions:  [  9.877754   -9.0906315   6.060169    9.167345   -7.7335677  17.703001
+ -18.898045 ]
+yielded actions:  [1.5170949 5.917395  2.6755822 5.190615  3.2460783 4.518915  2.845809 ]
+yielded actions:  [ 5.904979  -1.7746553  3.8915908  5.4123025  1.7152219  5.3399997
+ -3.8836684]
+yielded actions:  [-3.2740066   5.089948    5.909928    5.759058    5.480892    0.75470203]
+yielded actions:  [-4.863348   5.1917624 -0.3049513 -5.202504  12.758128  -7.03116
+  3.8292747 -2.4037433  1.3549852  0.8603532]
+yielded actions:  [  2.7987723   7.3104157  -5.8438444  -2.0874283 -12.108869   16.83433
+  10.216189 ]
+yielded actions:  [ 2.650824   -0.20637219  4.5669208   3.855764    4.071372   -3.7288551
+ -3.1605873  -2.9708729  -8.311454   15.872414  ]
+yielded actions:  [-5.770573   5.098637   0.9752498 -7.5944533 14.780144  -7.2319765
+  6.44313   -2.591445  -1.4495349]
+yielded actions:  [ -6.6437736    3.9346893   -0.25587484 -10.24207      2.418269
+  16.382149     7.8862243   -2.4299817   11.601523  ]
+yielded actions:  [-7.108465   -1.3528055   3.7319174  10.96394    14.018635   -0.68064815]
+yielded actions:  [ 4.2691665  6.5745425 -2.5042126  4.49414   -0.9308484 27.14884  ]
+yielded actions:  [-5.9690194 -1.8318398  6.456807  11.711379  14.964061 ]
+yielded actions:  [ 2.2761714 -0.5544384  4.7800126  1.9444551  3.2941716  2.5156262
+ -6.791772 ]
+yielded actions:  [-1.2052561 -2.6275887  6.2514887  3.5849001 12.2804165]
+yielded actions:  [ 6.6456    13.455982  -8.4200945  2.2061975 18.671623 ]
+yielded actions:  [-0.9225009 -2.807651   6.87419    3.6637595 12.848034 ]
+yielded actions:  [-3.8837912 -5.0826135  6.421389   7.6733418  4.211829  -9.885707 ]
+yielded actions:  [-3.239418   1.0729424 10.679541   6.271772   2.8746412 -3.0133839]
+yielded actions:  [ 3.7545152 -5.443536   5.022281  11.203473 ]
+yielded actions:  [-4.135395  -4.970497   6.2997317  7.706631   4.249376  -9.690403 ]
+yielded actions:  [-3.3474653  1.1374211 10.780521   6.3384647  2.8610752 -2.8128133]
+yielded actions:  [ 1.0601615 12.298321   6.0500336  7.35501    2.2974894  4.761346 ]
+yielded actions:  [-4.121671   1.7734566  9.733656   5.0684037  3.2223492]
+yielded actions:  [-4.414849   2.8109555 10.063917   5.193079   1.7715406]
+yielded actions:  [-5.6491256  2.1454067  9.78257    7.363421   4.0527897]
+yielded actions:  [-6.0138707  2.0060475  9.2198105  6.940447   2.510419 ]
+yielded actions:  [-7.173791  1.051469  9.970477  7.027402  3.4113  ]
+yielded actions:  [-6.1745424  2.04075    9.747606   6.5640306  3.7613456]
+yielded actions:  [-6.3065567  2.063984   9.769803   6.598092 ]
+player_xps: [83, 46, 96, 75]
+episode  40 scores [91, 42, 92, 50] epsilon 0.48
+player_xps: [76, 49, 45, 95]
+episode  41 scores [52, 23, -10, 90] epsilon 0.48
+player_xps: [94, 45, 84, 78]
+episode  42 scores [88, -10, 68, 56] epsilon 0.47
+player_xps: [92, 16, 213, 83]
+episode  43 scores [84, -68, 213, 91] epsilon 0.47
+player_xps: [87, 47, 90, 74]
+episode  44 scores [124, 19, 80, 142] epsilon 0.45
+player_xps: [93, 47, 97, 77]
+episode  45 scores [86, 19, 94, 106] epsilon 0.45
+player_xps: [92, 42, 13, 96]
+episode  46 scores [84, 35, 69, 92] epsilon 0.44
+player_xps: [96, 66, 85, 105]
+episode  47 scores [92, 32, 70, 130] epsilon 0.44
+player_xps: [98, 21, 85, 56]
+episode  48 scores [96, 14, 85, 12] epsilon 0.43
+player_xps: [101, 27, 76, 96]
+episode  49 scores [126, 45, 52, 92] epsilon 0.42
+yielded actions:  [ 0.60031617  7.974163    4.845339   11.870468    8.58502     4.544295  ]
+yielded actions:  [ -1.028025   18.543219  -11.460256    1.0110953  13.402181   -9.646129 ]
+yielded actions:  [-1.7775252 -1.4864697 14.196835  14.18913   14.500701  -6.2333627]
+yielded actions:  [-7.702542   1.0857618  9.401042   4.0299296 -6.948409  -2.7571356]
+yielded actions:  [-4.516912   9.376542  -2.09647    6.286644   6.7526493 -5.66476  ]
+yielded actions:  [ 5.713529   5.5515337 -3.283275   2.3938248 22.501505   3.494343 ]
+yielded actions:  [-17.080498   11.555422  -13.56657     4.132754    7.976762   -6.9448514]
+yielded actions:  [ 0.07240593 15.84154    -1.867629    6.615098   21.548454    4.5883207 ]
+yielded actions:  [-7.22204   -2.5913253 12.495884  14.048395   1.3386067 -3.7636278]
+yielded actions:  [-2.1090264  6.3164873 -1.2341896 -1.3681463 15.444061  -1.2649345]
+yielded actions:  [-0.12769471 -4.6135902  11.976694    4.452549   19.794214   -6.6397734 ]
+yielded actions:  [-12.559872   11.026181   -3.211087   -2.13048     8.989365   -2.9052892]
+yielded actions:  [ 0.32633632  4.106795    0.7004956   2.302062    9.030573   -9.785934  ]
+yielded actions:  [-13.041585     9.286164    -4.239474    -0.44087145  11.498731
+  -5.712202  ]
+yielded actions:  [ 2.0987642 11.978003  -5.878343   3.8019588 22.124184 ]
+yielded actions:  [ 0.9429594 -0.3864642  4.788121   7.1409445 17.783306 ]
+yielded actions:  [-1.3534436  5.7343116  6.705742   4.111316  12.474516  -3.8541696]
+yielded actions:  [-0.87690276 -0.4044177   5.5923934   9.205908   15.375354  ]
+yielded actions:  [ 0.6666131 11.478274  -7.6876035  3.4183507 21.896263 ]
+yielded actions:  [-2.1487908  5.5099454  8.8436165  1.2667068  3.3913379  3.4893434]
+yielded actions:  [-15.221077   10.216906    1.1113368  -2.21746     2.4049444   8.482996 ]
+yielded actions:  [ 0.10330468 -2.7362497  10.251198   16.90693   ]
+yielded actions:  [-14.492333     9.609267     0.67679155  -1.7142283    8.983434  ]
+yielded actions:  [-12.006942    1.64563    13.08264    15.050011    6.2447214]
+player_xps: [96, 71, 72, 97]
+episode  50 scores [92, 42, 44, 94] epsilon 0.42
+player_xps: [106, 16, 45, 98]
+episode  51 scores [106, -43, -10, 95] epsilon 0.41
