@@ -12,6 +12,7 @@ num_players = 4
 if __name__ == "__main__":
     execution_time = datetime.datetime.now().strftime("%Y_%m_%d_%X")
     model_folder = f"models/{sys.argv[1]}_{execution_time}"
+    print("model folder:", model_folder)
     if not os.path.isdir(model_folder):
         os.makedirs(model_folder, exist_ok = True)
 
