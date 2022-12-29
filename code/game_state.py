@@ -235,7 +235,7 @@ class GameState(object):
         num_rows_observation = 2
         num_cols_observation = 3
         observation = np.zeros(
-            (num_rows_observation * 2 + 1, num_cols_observation * 2 + 1, 5)
+            (num_rows_observation * 2 + 1, num_cols_observation * 2 + 1)
         )
         for i in range(-num_rows_observation, num_rows_observation + 1):
             for j in range(-num_cols_observation, num_cols_observation + 1):
@@ -244,21 +244,26 @@ class GameState(object):
                 x = self.players[player_id].x + j
                 y = self.players[player_id].y + i
                 if (x, y) in self.cell_life:
-                    observation[ri, rj, 0] = self.cell_life[(x, y)]
-                observation[ri, rj, 1:4] = -100
-                playersInPos = [p for p in self.players if p.x == x and p.y == y]
-                playersInPos.sort(key = lambda p: abs(player_id - p.id))
-                if len(playersInPos) > 0:
-                    observation[ri, rj, 1] = playersInPos[0].hp
-                    observation[ri, rj, 2] = playersInPos[0].xp
-                    if len(playersInPos) > 1:
-                        observation[ri, rj, 3] = playersInPos[1].hp
-                        observation[ri, rj, 4] = playersInPos[1].xp
+                    observation[ri, rj] = self.cell_life[(x, y)]
         observation = observation.flatten()
+        
+        player = self.players[player_id]
+        player_info = [0,0,player.hp,player.xp]
+        for i in range(len(self.players)):
+            if i == player_id: 
+                continue
+            other = self.players[i]
+            to_append = [-100, -100, -100,other.xp]
+            diff_x = other.x - player.x
+            diff_y = other.y - player.y
+            
+            if abs(diff_x) <= num_cols_observation and abs(diff_y) <= num_rows_observation:
+                to_append[0], to_append[1], to_append[2] = diff_x, diff_y, other.hp # difference well known
+            for el in to_append:
+                player_info.append(el)
+        player_info = np.array(player_info)
         # now include other relevant metrics
-        other_scores = [p.xp for p in self.players if p.id != player_id]
-        own_score = self.players[player_id].xp
-        observation = np.hstack((observation, own_score, other_scores, self.remaining_moves))
+        observation = np.hstack((observation, player_info, self.remaining_moves))
         return observation
 
     def step(self, id_player, action, print_player_action = False):
