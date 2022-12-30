@@ -253,10 +253,9 @@ class GameState(object):
             if i == player_id: 
                 continue
             other = self.players[i]
-            to_append = [-100, -100, -100,other.xp]
+            to_append = [-100, -100, 0,other.xp]
             diff_x = other.x - player.x
             diff_y = other.y - player.y
-            
             if abs(diff_x) <= num_cols_observation and abs(diff_y) <= num_rows_observation:
                 to_append[0], to_append[1], to_append[2] = diff_x, diff_y, other.hp # difference well known
             for el in to_append:
