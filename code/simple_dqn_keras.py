@@ -42,7 +42,7 @@ class ReplayBuffer(object):
         return states, actions, rewards, states_, terminal
 
 
-def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims, fc3_dims, fc4_dims):
+def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims, fc3_dims):
     init = tf.keras.initializers.HeUniform()
 
     model = Sequential(
@@ -50,7 +50,7 @@ def build_dqn(lr, n_actions, input_dims, fc1_dims, fc2_dims, fc3_dims, fc4_dims)
             Dense(fc1_dims, input_shape=(*input_dims,), activation = 'relu', kernel_initializer = init),
             Dense(fc2_dims,activation = 'relu', kernel_initializer = init),
             Dense(fc3_dims,activation = 'relu', kernel_initializer = init),
-            Dense(fc4_dims, activation = 'relu', kernel_initializer = init),
+            # Dense(fc4_dims, activation = 'relu', kernel_initializer = init),
             Dense(n_actions, kernel_initializer = init)
         ]
     )
@@ -80,7 +80,7 @@ class Agent(object):
         self.batch_size = batch_size
         self.model_file = fname
         self.memory = ReplayBuffer(mem_size, input_dims, n_actions, discrete=True)
-        self.q_eval = build_dqn(alpha, n_actions, input_dims, 128,128,128,128)
+        self.q_eval = build_dqn(alpha, n_actions, input_dims, 128,128,128)
 
     def remember(self, state, action, reward, state_, done):
         self.memory.store_transition(state, action, reward, state_, done)
