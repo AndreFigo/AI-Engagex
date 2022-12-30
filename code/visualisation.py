@@ -13,6 +13,7 @@ pygame.font.init()
 # print('get_driver:', pygame.display.get_driver())
 
 WIDTH, HEIGHT = 700, 500
+# WIDTH, HEIGHT = 1900, 1080
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption("-----------")
@@ -35,6 +36,7 @@ PLAYER_NUM = 0
 
 
 SCORE_FONT = pygame.font.SysFont('comicsans', 25)
+# SCORE_FONT = pygame.font.SysFont('comicsans', 50)
 
 
 FPS = 10
@@ -112,7 +114,7 @@ def draw_players(state):
 
                 color = (100, 100-life, 50)
                 color_rgb = hsv_to_rgb(color)
-                print(color_rgb)
+                #print(color_rgb)
 
                 pygame.draw.rect(WIN, color_rgb, (WIDTH//H_CELL_NUM * j , HEIGHT//V_CELL_NUM * i , WIDTH//H_CELL_NUM, HEIGHT//V_CELL_NUM))
             
@@ -234,7 +236,7 @@ def main():
         if not pause:
             # pygame.time.wait(1000)
             clock.tick(5)
-            
+            # print(pygame.display.get_desktop_sizes())
             file_index, index, line = next_line( files, exp_dir, PLAYER_NUM, index, file_index, lines)
 
             if line is None:
