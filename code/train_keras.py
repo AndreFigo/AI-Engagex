@@ -114,18 +114,18 @@ def learn_from_games(
             file_id.flush()
         # if record_condition(i) :
         #    np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
-        for i in range(len(scores)):
-            if scores[i] > best_scores[i]:
-                agents[i].model_file = "%s/model_agent_%d_epoch_%d_reward_%d_epsilon_%f.h5" % (
+        for sc in range(len(scores)):
+            if scores[sc] > best_scores[sc]:
+                agents[sc].model_file = "%s/model_agent_%d_epoch_%d_reward_%d_epsilon_%f.h5" % (
                     model_folder,
                     j,
                     i + 1,
-                    scores[i],
-                    agents[i].epsilon
+                    scores[sc],
+                    agents[sc].epsilon
                 )
                 np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
-                agent.save_model()
-                best_scores[i] = scores[i]
+                agents[sc].save_model()
+                best_scores[sc] = scores[sc]
 
         # eps_history.append(agent.epsilon)
         print(
