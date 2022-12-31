@@ -2,3 +2,6 @@ keras
 numpy
 tensorflow
 pygame
+ann-visualizer
+graphviz
+matplotlib
