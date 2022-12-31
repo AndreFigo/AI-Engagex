@@ -12,13 +12,12 @@ if __name__ == "__main__":
     game.players[1] = EngagexPlayer(1,0,0,game)
     game.players[1].xp = 5
     game.players[1].hp = 90
-    p0_obs =game.observation_tensor(0)[:-num_players]
-    p1_obs = game.observation_tensor(1)[:-num_players]
+    p0_obs =game.observation_tensor(0)
+    p1_obs = game.observation_tensor(1)
     print(np.sum(p0_obs != p1_obs ))
-    p0_obs=p0_obs.reshape((5,7,5))
-    p1_obs=p1_obs.reshape((5,7,5))
+
     print(p0_obs.shape)
     print(p1_obs.shape)
-    print(p0_obs[2,3,:])
-    print(p1_obs[2,3,:])
+    print(p0_obs[35:39])
+    print(p1_obs[35:39])
     

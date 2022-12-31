@@ -53,7 +53,7 @@ def get_agents(
         return all_agents
 
 def record_condition(i:int):
-    return i % 100 == 0
+    return i % 200 == 0
 
 def learn_from_games(
     n_games,
@@ -73,12 +73,16 @@ def learn_from_games(
         file_id = open(file_output, "a")
         record_agents(agents, model_folder)
     env = GameState(num_players)
+    best_scores = [0 for _ in range(num_players)]
     for i in range(n_games):
         done = False
         scores = [0 for _ in range(env.num_players)]
+        
         env = GameState(num_players)
+
         game_record = np.array([])
         while not done:
+        
             for j in range(env.num_players):  # agent in agents:
                 agent: Agent = agents[j]
 
@@ -94,12 +98,12 @@ def learn_from_games(
                 scores[j] += reward
                 # obs_after = env.observation_tensor(i)
                 agent.remember(obs, action, reward, observation_, int(done))
-                if record_condition(i):
-                    aid = np.hstack((j, obs[:-(num_players+1)], action, observation_[:-(num_players+1)])) # all the necessary info for the gui
-                    if game_record.shape[0] == 0:
-                        game_record = np.array(aid)
-                    else:
-                        game_record = np.vstack((game_record, aid))
+                
+                aid = np.hstack((j, obs, action, observation_)) # all the necessary info for the gui
+                if game_record.shape[0] == 0:
+                    game_record = np.array(aid)
+                else:
+                    game_record = np.vstack((game_record, aid))
                 agent.learn()
         if record:
             player_xps: list = [env.players[i].xp for i in range(env.num_players)]
@@ -108,9 +112,20 @@ def learn_from_games(
             str_init += "," + ",".join([str(i) for i in env.total_actions])
             file_id.write("%s\n" % str_init)
             file_id.flush()
-        if record_condition(i) :
-            np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
-            
+        # if record_condition(i) :
+        #    np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
+        for i in range(len(scores)):
+            if scores[i] > best_scores[i]:
+                agents[i].model_file = "%s/model_agent_%d_epoch_%d_reward_%d_epsilon_%f.h5" % (
+                    model_folder,
+                    j,
+                    i + 1,
+                    scores[i],
+                    agents[i].epsilon
+                )
+                np.savetxt("%s/game_record_%d.csv"%(model_folder, i) ,game_record,fmt="%g",delimiter = ",")
+                agent.save_model()
+                best_scores[i] = scores[i]
 
         # eps_history.append(agent.epsilon)
         print(
@@ -120,17 +135,6 @@ def learn_from_games(
             scores,
             "epsilon %.2f" % agents[0].epsilon,
         )
-
-        if record_condition(i):
-            j = 0
-            for agent in agents:
-                agent.model_file = "%s/model_agent_%d_epoch_%d.h5" % (
-                    model_folder,
-                    j,
-                    i + 1,
-                )
-                agent.save_model()
-                j += 1
     if record:
         file_id.close()
 
