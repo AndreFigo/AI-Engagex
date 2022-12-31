@@ -65,17 +65,9 @@ def draw_grid():
 def draw_triangle(x, y, color, size):
     pygame.draw.polygon(WIN, color, ((x, y), (x+20, y), (x+10, y+20)))
 
-def draw_shadow(action, cells, players ):
+def draw_shadow(action, state):
 
-    # if there are two players in the middle of the map
-
-    same_pos = False
-    for i in range(1,len(players)):
-        if players[i,0] == 0 and players[i,1] == 0:
-            same_pos = True
-            break
-
-    if not same_pos:
+    if state[H_CELL_NUM//2][V_CELL_NUM//2][1] <= 0:
         x = WIDTH//H_CELL_NUM * H_CELL_NUM/2
         y = HEIGHT//V_CELL_NUM * (V_CELL_NUM/2)
         if action == 0:
@@ -94,7 +86,7 @@ def draw_shadow(action, cells, players ):
 
     
 
-def draw_players(cells, players ):
+def draw_players(state):
     #draw circle in the middle of the cell
     # for i in range(len(env)):
     #     player = env[i]
@@ -102,58 +94,43 @@ def draw_players(cells, players ):
     #     y = player.y
     #     pygame.draw.circle(WIN, BLACK, (x*100+50, y*100+50), 20)
     # pygame.draw.circle(WIN, RED, (WIDTH//H_CELL_NUM * H_CELL_NUM/2, HEIGHT//V_CELL_NUM * V_CELL_NUM/2), 30)
-    sh = cells.shape
+
+    sh = state.shape
     for i in range(sh[0]):
         for j in range(sh[1]):
-            cell = cells[i,j]
-            if cell > 0:
 
-                color = (100, 100-cell, 50)
+            life = state[i][j][0]
+            p1_life = state[i][j][1]
+            p1_xp = state[i][j][2]
+            p2_life = state[i][j][3]
+            p2_xp = state[i][j][4]
+
+            if( i== V_CELL_NUM//2 and j==H_CELL_NUM//2):
+                draw_life(p1_life)
+                draw_score(p1_xp)
+                
+
+            if life > 0:
+
+                color = (100, 100-life, 50)
                 color_rgb = hsv_to_rgb(color)
                 #print(color_rgb)
 
                 pygame.draw.rect(WIN, color_rgb, (WIDTH//H_CELL_NUM * j , HEIGHT//V_CELL_NUM * i , WIDTH//H_CELL_NUM, HEIGHT//V_CELL_NUM))
+            
 
 
-    same_pos = -1
-    for i in range(1,len(players)):
-        if players[i,0] == 0 and players[i,1] == 0:
-            same_pos = i
-            break
-
-    if same_pos == -1:
-        x = H_CELL_NUM//2
-        y = V_CELL_NUM//2
-        pygame.draw.circle(WIN, BLUE, (WIDTH//H_CELL_NUM * x + WIDTH//H_CELL_NUM//2, HEIGHT//V_CELL_NUM * y +  HEIGHT//V_CELL_NUM//2), 20)
-        for i in range(1, len(players)):
-            player = players[i]
-            color = ORANGE
-            x = player[0] + H_CELL_NUM//2
-            y = player[1] + V_CELL_NUM//2
-            pygame.draw.circle(WIN, color, (WIDTH//H_CELL_NUM * x + WIDTH//H_CELL_NUM//2, HEIGHT//V_CELL_NUM * y + HEIGHT//V_CELL_NUM//2), 20)
-    else: 
-        x = H_CELL_NUM//2
-        y = V_CELL_NUM//2
-        pygame.draw.circle(WIN, BLUE, (WIDTH//H_CELL_NUM * x + 15, HEIGHT//V_CELL_NUM * y + 15), 10)
-        pygame.draw.circle(WIN, ORANGE, (WIDTH//H_CELL_NUM * (x+1) - 15, HEIGHT//V_CELL_NUM * (y+1) -15 ), 10)
-        for i in range(1, len(players)):
-            if i == same_pos:
-                continue
-            player = players[i]
-            color = ORANGE
-            x = player[0] + H_CELL_NUM//2
-            y = player[1] + V_CELL_NUM//2
-            pygame.draw.circle(WIN, color, (WIDTH//H_CELL_NUM * x + WIDTH//H_CELL_NUM//2, HEIGHT//V_CELL_NUM * y + HEIGHT//V_CELL_NUM//2), 20)
+            if p1_life > 0 and p2_life<=0:
+                if( i== V_CELL_NUM//2 and j==H_CELL_NUM//2):
+                    pygame.draw.circle(WIN, BLUE, (WIDTH//H_CELL_NUM * j + WIDTH//H_CELL_NUM//2, HEIGHT//V_CELL_NUM * i + HEIGHT//V_CELL_NUM//2), 20)
+                else:
+                    pygame.draw.circle(WIN, ORANGE, (WIDTH//H_CELL_NUM * j + WIDTH//H_CELL_NUM//2, HEIGHT//V_CELL_NUM * i + HEIGHT//V_CELL_NUM//2), 20)
 
 
+            elif p1_life >0:
 
-
-    p_life = players[0][2]
-    p_xp = players[0][3]
-    draw_life(p_life)
-    draw_score(p_xp)
-
-
+                pygame.draw.circle(WIN, BLUE, (WIDTH//H_CELL_NUM * j + 15, HEIGHT//V_CELL_NUM * i + 15), 10)
+                pygame.draw.circle(WIN, ORANGE, (WIDTH//H_CELL_NUM * (j+1) - 15, HEIGHT//V_CELL_NUM * (i+1) -15 ), 10)
                  
 
 
@@ -207,32 +184,23 @@ def process_line(line):
 
     line = line.split(",")
     id = int(line[0])
-    past = (line[1:53])
+    past = (line[1:176])
     past_arr = np.array([eval(i) for i in past])
-
+    past_arr = past_arr.reshape(V_CELL_NUM, H_CELL_NUM, 5)
     
-    action = int(line[53])
-    current = (line[54:len(line)])
+    action = int(line[176])
+    current = (line[177:len(line)])
     current_arr = np.array([eval(i) for i in current])
-    cells = current_arr[0:V_CELL_NUM*H_CELL_NUM].reshape(V_CELL_NUM, H_CELL_NUM)
-    players = current_arr[V_CELL_NUM*H_CELL_NUM:len(current_arr)-1].reshape(4,4)
-    remaining_moves = current_arr[len(current_arr)-1]
-
-    print(cells)
-    print(players)
-    print(remaining_moves)
-    print()
-    print()
-    
-    return id, past_arr, action, cells, players, remaining_moves
+    current_arr = current_arr.reshape(V_CELL_NUM, H_CELL_NUM, 5)
+    return id, past_arr, action, current_arr
 
 
-def draw_window(cells, players , action):
+def draw_window(past, current, action):
 
     draw_grid()
 
-    draw_players(cells, players )
-    draw_shadow(action, cells, players )
+    draw_players(current)
+    draw_shadow(action, current)
 
 
 
@@ -267,7 +235,7 @@ def main():
     while run:
         if not pause:
             # pygame.time.wait(1000)
-            clock.tick(1)
+            clock.tick(5)
             # print(pygame.display.get_desktop_sizes())
             file_index, index, line = next_line( files, exp_dir, PLAYER_NUM, index, file_index, lines)
 
@@ -277,8 +245,9 @@ def main():
 
                 break
             # print(line)
-            id, past, action, cells, players, remaining_moves = process_line(line)
+            id, past, action, current = process_line(line)
 
+            
 
             # print(id)
             # print(past)
@@ -288,7 +257,7 @@ def main():
                 print("wrong player number")
                 break
 
-            draw_window( cells, players , action)
+            draw_window(past, current, action)
 
         # if(np.all(past == past_past)):
         #     print("same state")
