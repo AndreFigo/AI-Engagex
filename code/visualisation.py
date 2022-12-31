@@ -94,7 +94,7 @@ def draw_shadow(action, cells, players ):
 
     
 
-def draw_players(cells, players ):
+def draw_players(cells, players, action ):
     #draw circle in the middle of the cell
     # for i in range(len(env)):
     #     player = env[i]
@@ -152,6 +152,7 @@ def draw_players(cells, players ):
     p_xp = players[0][3]
     draw_life(p_life)
     draw_score(p_xp)
+    draw_action(action)
 
 
                  
@@ -168,11 +169,27 @@ def draw_life(life):
     pass
 
 def draw_score(score):
-
     socre_text = SCORE_FONT.render(
         "SCORE: " + str(score), 1, BLACK)
     WIN.blit(socre_text, (WIDTH - socre_text.get_width() - 5, 10))
 
+def draw_action(action):
+    actions = [
+            "move_south",
+            "move_north",
+            "move_east",
+            "move_west",
+            "collect",
+            "commit",
+            "seed",
+            "attack",
+            "kill",
+            "flee",
+            "share",
+        ]
+    action_text = SCORE_FONT.render(
+        "ACTION: " + actions[action], 1, BLACK)
+    WIN.blit(action_text, (WIDTH - action_text.get_width() - 5, 40))
 
 def get_game_records_files( dir_name):
     experience_dir  = os.path.join("..", "models",dir_name )
@@ -218,11 +235,11 @@ def process_line(line):
     players = current_arr[V_CELL_NUM*H_CELL_NUM:len(current_arr)-1].reshape(4,4)
     remaining_moves = current_arr[len(current_arr)-1]
 
-    print(cells)
-    print(players)
-    print(remaining_moves)
-    print()
-    print()
+    # print(cells)
+    # print(players)
+    # print(remaining_moves)
+    # print()
+    # print()
     
     return id, past_arr, action, cells, players, remaining_moves
 
@@ -231,8 +248,9 @@ def draw_window(cells, players , action):
 
     draw_grid()
 
-    draw_players(cells, players )
+    draw_players(cells, players, action )
     draw_shadow(action, cells, players )
+
 
 
 
@@ -267,13 +285,13 @@ def main():
     while run:
         if not pause:
             # pygame.time.wait(1000)
-            clock.tick(1)
+            clock.tick(5)
             # print(pygame.display.get_desktop_sizes())
             file_index, index, line = next_line( files, exp_dir, PLAYER_NUM, index, file_index, lines)
 
             if line is None:
                 print("end of files")
-                pygame.time.wait(10000)
+                pygame.time.wait(1000)
 
                 break
             # print(line)
