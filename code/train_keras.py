@@ -118,7 +118,7 @@ def learn_from_games(
             if scores[sc] > best_scores[sc]:
                 agents[sc].model_file = "%s/model_agent_%d_epoch_%d_reward_%d_epsilon_%f.h5" % (
                     model_folder,
-                    j,
+                    sc,
                     i + 1,
                     scores[sc],
                     agents[sc].epsilon
