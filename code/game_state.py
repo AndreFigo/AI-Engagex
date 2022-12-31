@@ -306,7 +306,7 @@ class GameState(object):
             # else:
             #     best_player_score = max([p.xp for p in self.players])
             #    reward -= best_player_score - self.players[id_player].xp
-            reward -= 100 
+            reward -= self.remaining_moves 
         observation = self.observation_tensor(id_player)
         self.remaining_moves -= 1
         done = self.remaining_moves <= 0 or all(
